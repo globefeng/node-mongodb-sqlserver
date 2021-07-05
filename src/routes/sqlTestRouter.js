@@ -8,7 +8,7 @@ var config = {
         type: 'default',
         options: {
             userName: 'itcwangfeng_SQLLogin_1',
-            password: 'p1v5smrip1'
+            password: 'a6y8-p1v5smrip1-y7x8'
         }
     },
     options: {
