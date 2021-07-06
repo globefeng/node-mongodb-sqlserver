@@ -8,7 +8,7 @@ var config = {
         type: 'default',
         options: {
             userName: 'itcwangfeng_SQLLogin_1',
-            password: 'a6y8-p1v5smrip1-y7x8'
+            password: 'p1v5smrip1'
         }
     },
     options: {
@@ -26,6 +26,12 @@ router.use(function timeLog (req, res, next) {
   next()
 })
 
+/**
+ * @swagger
+ * /api/product:
+ *    get:
+ *      description: This should return all products
+ */
 router.get('/', function (req, res) {
   connection.on('connect', function(err) {  
     if (err) {
