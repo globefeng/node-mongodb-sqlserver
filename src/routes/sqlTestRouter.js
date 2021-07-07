@@ -29,8 +29,19 @@ router.use(function timeLog (req, res, next) {
 /**
  * @swagger
  * /api/product:
- *    get:
- *      description: This should return all products
+ *   get:
+ *     description: This should return all products
+ *   responses:
+ *     200:
+ *       description: products
+ *       schema:
+ *         type: object
+ *         properties: 
+ *           _id: 
+ *             type: string
+ *           name:
+ *             type: string
+ *   
  */
 router.get('/', function (req, res) {
   connection.on('connect', function(err) {  

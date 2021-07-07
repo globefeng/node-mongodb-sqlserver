@@ -42,8 +42,8 @@ app.get('/', (req, res) =>
     res.send(`Store server running on port ${PORT}`)
 );
 
-// app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs));
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.listen(PORT, () => 
     console.log(`Your server is running on port ${PORT}`)
