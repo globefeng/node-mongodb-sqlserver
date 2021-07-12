@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const productRouter = require('./src/routes/mongodbTestRouter');
 const sqlTestRouter = require('./src/routes/sqlTestRouter');
+const authRouter = require('./src/routes/authRouter');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
@@ -35,6 +36,7 @@ app.use(express.urlencoded());
 app.use(express.json()); 
 
 // routes(app);
+app.use('/api/auth', authRouter);
 app.use('/api/product', productRouter);
 app.use('/api/sqltest', sqlTestRouter);
 

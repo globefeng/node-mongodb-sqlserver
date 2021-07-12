@@ -26,23 +26,6 @@ router.use(function timeLog (req, res, next) {
   next()
 })
 
-/**
- * @swagger
- * /api/product:
- *   get:
- *     description: This should return all products
- *   responses:
- *     200:
- *       description: products
- *       schema:
- *         type: object
- *         properties: 
- *           _id: 
- *             type: string
- *           name:
- *             type: string
- *   
- */
 router.get('/', function (req, res) {
   connection.on('connect', function(err) {  
     if (err) {
@@ -82,6 +65,10 @@ function queryDatabase(callback) {
       }
     });
   })
+
+  request.on('doneInProc', function (rowCount, more, rows) {  
+    console.log('doneInProc: '+ rowCount + ' row(s) returned');  
+  }); 
 
   connection.execSql(request);
 }
