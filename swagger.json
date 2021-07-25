@@ -11,6 +11,16 @@
   },
   "host": "localhost:4000",
   "basePath": "/",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users"
+    },
+    {
+      "name": "Products",
+      "description": "Products from MongoDB"
+    }
+  ],
   "schemes": [
     "http"
   ],
@@ -21,10 +31,85 @@
     "application/json"
   ],
   "paths": {
+    "/api/auth/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Get all users",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "get all users",
+            "schema": {
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "add new user",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/NewUser"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "add new user",
+            "schema": {
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/signin": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Sign in",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "Sign in",
+            "schema": {
+              "$ref": "#/definitions/NewUser"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "You are signed in",
+            "schema": {
+            }
+          }
+        }
+      }
+    },
+
     "/api/product": {
       "get": {
         "tags": [
-          "Get Data from MongoDB"
+          "Products"
         ],
         "description": "Get Data from MongoDB",
         "produces": [
@@ -59,6 +144,59 @@
     }
 
 
+  },
+  "definitions": {
+    "NewUser": {
+      "required": [
+        "username",
+        "password"
+      ],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }       
+      }
+    },
+    "updateUser": {
+      "required": [
+        "name",
+        "companies"
+      ],
+      "properties": {
+        "isPublic": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "books": {
+          "type": "array",
+          "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number"
+                }
+              }
+          }
+              
+        },
+        "companies": {
+          "type": "array",
+          "items": {
+              "type": "string"      
+          }
+              
+        }
+       
+      }
+    }
   }
 }
 

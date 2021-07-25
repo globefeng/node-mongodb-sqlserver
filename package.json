@@ -9,6 +9,7 @@
   "author": "Emmanuel Henri",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "expect.js": "^0.3.1",
     "express": "^4.17.1",
     "mocha": "^7.0.1",
