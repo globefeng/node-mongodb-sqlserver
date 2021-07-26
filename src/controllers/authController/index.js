@@ -1,6 +1,8 @@
 
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { options, secret } = require('../../utils/authConst');
 
 const { Schema } = mongoose;
 
@@ -69,21 +71,20 @@ module.exports = class authController {
       return res.status(500).json('Invalid input data');
     }
 
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(password, salt);
-
     UserModel.findOne({username}, (err, user) => {
       if (!err) {
         bcrypt.compare(password, user.password).then(match => {
           if (match) {
-            return res.status(200).json('You are signed in');
+            const payload = { user: username };
+            const token = jwt.sign(payload, secret, options);
+            return res.status(200).json(token);
           }
-          return res.status(500).json('Fail to sign in 111');
+          return res.status(500).json('Authentication error');
         }).catch(err => {
-          return res.status(500).json('Fail to sign in 222');
+          return res.status(500).json('Authentication error');
         });
       } else {
-        return res.status(500).json('Fail to sign in 333');
+        return res.status(500).json('Authentication error');
       } 
     })
   }
