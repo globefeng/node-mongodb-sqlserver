@@ -10,10 +10,9 @@ module.exports = {
       try {
         result = jwt.verify(token, secret, options);
         req.decoded = result;
-        // res.status(200).json(result);
         next();
       } catch (err) {
-        res.status(401).send('Authentication error. Invalid token.');
+        return res.status(401).send('Authentication error. Invalid token.');
       }
     } else {
       res.status(401).send('Authentication error. Token required.');

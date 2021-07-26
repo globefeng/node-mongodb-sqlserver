@@ -14,6 +14,9 @@ const UserSchema = new Schema(
     password: { 
       type: String,
     },
+    role: {
+      type: String,
+    },
     created_date : {
       type: Date,
       default: Date.now
@@ -31,8 +34,14 @@ module.exports = class authController {
   static users(req, res) {
     UserModel.find({}, (err, users) => {
       if (!err) {
-        var useList = users.map(({username, expired_date}) => ({username, expired_date}));
-        return res.status(200).json(useList);
+        const { role } = req.decoded;
+        if (role && role === 'admin') {
+          var useList = users.map(({username, expired_date}) => ({username, expired_date}));
+          return res.status(200).json(useList);  
+        }
+        else {
+          return res.status(401).json('No authority to access the data')
+        }
       } 
       return res.status(500).send(err);
     });
@@ -54,6 +63,7 @@ module.exports = class authController {
     let userModel = new UserModel({
       username: username,
       password: hash,
+      role: 'user',
       expired_date: date,
     });
 
@@ -75,7 +85,7 @@ module.exports = class authController {
       if (!err) {
         bcrypt.compare(password, user.password).then(match => {
           if (match) {
-            const payload = { user: username };
+            const payload = { user: username, role: user.role };
             const token = jwt.sign(payload, secret, options);
             return res.status(200).json(token);
           }
