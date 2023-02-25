@@ -1,6 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const productRouter = require('./src/routes/mongodbTestRouter');
 const sqlTestRouter = require('./src/routes/sqlTestRouter');
 const authRouter = require('./src/routes/authRouter');
 const swaggerUi = require('swagger-ui-express');
@@ -26,22 +24,20 @@ const options = {
 
 const specs = swaggerJsdoc(options);
 
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/productsdb', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-} )
 
 app.use(express.urlencoded());
 app.use(express.json()); 
 
 // routes(app);
 app.use('/api/auth', authRouter);
-app.use('/api/product', productRouter);
 app.use('/api/sqltest', sqlTestRouter);
 
 app.get('/', (req, res) =>
     res.send(`Store server running on port ${PORT}`)
+);
+
+app.get('/welcome', (req, res) =>
+    res.send(`welcome to globefeng's nodejs api`)
 );
 
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

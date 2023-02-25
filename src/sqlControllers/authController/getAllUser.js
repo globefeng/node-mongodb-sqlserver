@@ -3,7 +3,7 @@ const { Connection, Request } = require("tedious");
 const { sqlConfig } = require("../index");
 
 const sqlConnection = new Connection(sqlConfig);
-const queryString = `SELECT [user].id, [user].name, [user].password, [user].expire, [user].code, role.name AS role FROM [user] INNER JOIN role ON [user].roleId = role.id`;
+const queryString = `SELECT [user].id, [user].name, [user].password FROM [users]`;
 
 module.exports = function getAllUsers(req, res) {
   return new Promise((resolve, reject) => {

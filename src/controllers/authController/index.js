@@ -1,34 +1,8 @@
 
-const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { options, secret } = require('../../utils/authConst');
 
-const { Schema } = mongoose;
-
-const UserSchema = new Schema(
-  {
-    username: { 
-      type: String,
-    },
-    password: { 
-      type: String,
-    },
-    role: {
-      type: String,
-    },
-    created_date : {
-      type: Date,
-      default: Date.now
-    },
-    expired_date : {
-      type: Date,
-      default: null
-    }
-  }
-);
-
-const UserModel = mongoose.model('User', UserSchema);
 
 module.exports = class authController { 
   static users(req, res) {

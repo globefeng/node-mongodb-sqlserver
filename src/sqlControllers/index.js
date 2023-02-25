@@ -1,15 +1,15 @@
 export const sqlConfig = {  
-  server: 'stockNode.mssql.somee.com',
+  server: 'nodetest.mssql.somee.com',
   authentication: {
       type: 'default',
       options: {
-          userName: 'globefeng_SQLLogin_1',
-          password: '9jsuzjte3o'
+          userName: 'itcwangfeng_SQLLogin_1',
+          password: 'p1v5smrip1'
       }
   },
   options: {
       // If you are on Microsoft Azure, you need encryption:
       encrypt: false,
-      database: 'stockNode'
+      database: 'nodetest'
   }
 }; 

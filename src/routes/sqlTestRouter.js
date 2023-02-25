@@ -43,7 +43,7 @@ function queryDatabase(callback) {
 
   var result = [];  
   const request = new Request(
-    `SELECT * FROM Sectors`,
+    `SELECT * FROM Users`,
     (err, rowCount) => {
       if (err) {
         console.error(err.message);
